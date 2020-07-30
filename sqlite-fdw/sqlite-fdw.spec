@@ -20,6 +20,7 @@ License:        PostgreSQL
 URL:            https://github.com/pgspider/%{sname}
 Source0:        https://github.com/pgspider/%{sname}/archive/v%{sversion}.tar.gz
 Patch0:         %{sname}-pg%{pgmajorversion}-makefile-pgxs.patch
+Patch1:		sqlite_fdw-limit-sort-pushdown.patch
 BuildRequires:  postgresql%{pgmajorversion}-devel
 BuildRequires:  postgresql%{pgmajorversion}-server sqlite-devel
 Requires:       postgresql%{pgmajorversion}-server
@@ -43,7 +44,8 @@ BuildRequires:  advance-toolchain-%{atstring}-devel
 This PostgreSQL extension is a Foreign Data Wrapper for SQLite.
 
 %prep
-%setup -q -n %{sname}-%{version}
+%setup -q -n %{sname}-%{sversion}
+%patch0 -p0
 %patch0 -p0
 
 %build
