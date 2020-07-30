@@ -46,7 +46,7 @@ This PostgreSQL extension is a Foreign Data Wrapper for SQLite.
 %prep
 %setup -q -n %{sname}-%{sversion}
 %patch0 -p0
-%patch0 -p0
+%patch1 -p1
 
 %build
 %ifarch ppc64 ppc64le
