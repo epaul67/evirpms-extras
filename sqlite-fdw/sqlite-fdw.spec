@@ -13,7 +13,7 @@
 Summary:        SQLite Foreign Data Wrapper for PostgreSQL
 
 Name:           %{sname}%{pgmajorversion}
-Version:        1.2.0-evi
+Version:        1.2.0+evi
 Release:        1%{?dist}
 License:        PostgreSQL
 URL:            https://github.com/pgspider/%{sname}
