@@ -1,6 +1,7 @@
 %global sname   sqlite_fdw
 %global sversion 1.2.0
 %global pgmajorversion 12
+%global pginstdir /usr/pgsql-%{pgmajorversion}
 
 %ifarch ppc64 ppc64le
 # Define the AT version and path.
