@@ -1,1 +1,1 @@
-# sqlite_fdw-rpmbuild
+# sqlite-fdw RPM Packaging
