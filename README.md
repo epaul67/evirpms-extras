@@ -1,1 +1,1 @@
-# sqlite-fdw RPM Packaging
+# EVIRPMS (extras) Packaging
