@@ -1,4 +1,5 @@
 %global sname   sqlite_fdw
+%global sversion 1.2.0
 %global pgmajorversion 12
 
 %ifarch ppc64 ppc64le
@@ -13,11 +14,11 @@
 Summary:        SQLite Foreign Data Wrapper for PostgreSQL
 
 Name:           %{sname}%{pgmajorversion}
-Version:        1.2.0+evi
+Version:        %{sversion}+evi
 Release:        1%{?dist}
 License:        PostgreSQL
 URL:            https://github.com/pgspider/%{sname}
-Source0:        https://github.com/pgspider/%{sname}/archive/v%{version}.tar.gz
+Source0:        https://github.com/pgspider/%{sname}/archive/v%{sversion}.tar.gz
 Patch0:         %{sname}-pg%{pgmajorversion}-makefile-pgxs.patch
 BuildRequires:  postgresql%{pgmajorversion}-devel
 BuildRequires:  postgresql%{pgmajorversion}-server sqlite-devel
