@@ -1,0 +1,13 @@
+diff --git a/Makefile b/Makefile
+index 4aa6320..38aa21d 100644
+--- a/Makefile
++++ b/Makefile
+@@ -30,7 +30,7 @@ endif
+ SHLIB_LINK := -lsqlite3
+ 
+ ifdef USE_PGXS
+-PG_CONFIG = pg_config
++PG_CONFIG = /usr/pgsql-12/bin/pg_config
+ PGXS := $(shell $(PG_CONFIG) --pgxs)
+ include $(PGXS)
+ ifndef MAJORVERSION

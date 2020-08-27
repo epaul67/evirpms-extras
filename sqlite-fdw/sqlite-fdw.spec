@@ -20,6 +20,7 @@ Release:        1%{?dist}
 License:        PostgreSQL
 URL:            https://github.com/pgspider/%{sname}
 Source0:        https://github.com/pgspider/%{sname}/archive/v%{sversion}.tar.gz
+Patch0:         %{sname}-pg%{pgmajorversion}-makefile-pgxs.patch
 BuildRequires:  postgresql%{pgmajorversion}-devel
 BuildRequires:  postgresql%{pgmajorversion}-server sqlite-devel
 Requires:       postgresql%{pgmajorversion}-server
@@ -44,6 +45,7 @@ This PostgreSQL extension is a Foreign Data Wrapper for SQLite.
 
 %prep
 %setup -q -n %{sname}-%{sversion}
+%patch0 -p0
 
 %build
 %ifarch ppc64 ppc64le
