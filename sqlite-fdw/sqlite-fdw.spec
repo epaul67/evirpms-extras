@@ -1,5 +1,5 @@
 %global sname   sqlite_fdw
-%global sversion 1.2.0
+%global sversion 1.2.1
 %global pgmajorversion 12
 %global pginstdir /usr/pgsql-%{pgmajorversion}
 
@@ -20,8 +20,6 @@ Release:        1%{?dist}
 License:        PostgreSQL
 URL:            https://github.com/pgspider/%{sname}
 Source0:        https://github.com/pgspider/%{sname}/archive/v%{sversion}.tar.gz
-Patch0:         %{sname}-pg%{pgmajorversion}-makefile-pgxs.patch
-Patch1:		sqlite_fdw-limit-sort-pushdown.patch
 BuildRequires:  postgresql%{pgmajorversion}-devel
 BuildRequires:  postgresql%{pgmajorversion}-server sqlite-devel
 Requires:       postgresql%{pgmajorversion}-server
@@ -46,8 +44,6 @@ This PostgreSQL extension is a Foreign Data Wrapper for SQLite.
 
 %prep
 %setup -q -n %{sname}-%{sversion}
-%patch0 -p0
-%patch1 -p1
 
 %build
 %ifarch ppc64 ppc64le
@@ -87,12 +83,8 @@ USE_PGXS=1 %{__make} %{?_smp_mflags} install DESTDIR=%{buildroot}
 %endif
 
 %changelog
-* Tue Oct 1 2019 Devrim Gündüz <devrim@gunduz.org> - 1.2.0-1
-- Update to 1.2.0
+* Thu Aug 27 2020 David Bueno <dbueno@evicertia.com> - 1.2.1-1
+- Update to 1.2.1
 
-* Wed Oct 31 2018 Devrim Gündüz <devrim@gunduz.org> - 1.1.0-1
-- Update to 1.1.0
-
-* Tue Oct 23 2018 Devrim Gündüz <devrim@gunduz.org> - 1.0.0-1
-- Initial packaging for PostgreSQL RPM repositories
-
+* Thu Jul 30 2020 Pablo Ruiz <pruiz@evicertia.com> - 1.2.0-1
+- Initial packaging for Sqlite_fdw RPM repositories
