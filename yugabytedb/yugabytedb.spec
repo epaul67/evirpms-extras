@@ -70,7 +70,6 @@ mkdir -p %{buildroot}%{appdir}
 
 
 %{__install} -m 644 %{SOURCE1} %{buildroot}/lib/systemd/system/yugabyted.service
-%{__install} -d -m 640 %{buildroot}/etc/yugabytedb
 %{__install} -d -m 640 %{buildroot}/var/log/yugabytedb
 %{__install} -d -m 640 %{buildroot}/var/lib/yugabytedb
 ls -l %{buildroot} %{buildroot}/etc %{buildroot}/etc/yugabytedb
@@ -148,8 +147,8 @@ fi
 
 %files server
 %defattr(-,root,root,-)
-%dir /etc/yugabytedb
-%config(noreplace) /etc/yugabytedb/yugabytedb.conf
+%dir %attr(755,root,root) /etc/yugabytedb
+%config(noreplace) %attr(640,-,-) /etc/yugabytedb/yugabytedb.conf
 %dir /opt/yugabytedb
 %dir /var/log/yugabytedb
 %dir /var/lib/yugabytedb
