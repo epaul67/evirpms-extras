@@ -73,6 +73,7 @@ mkdir -p %{buildroot}%{appdir}
 %{__install} -d -m 640 %{buildroot}/etc/yugabytedb
 %{__install} -d -m 640 %{buildroot}/var/log/yugabytedb
 %{__install} -d -m 640 %{buildroot}/var/lib/yugabytedb
+ls -l %{buildroot} %{buildroot}/etc %{buildroot}/etc/yugabytedb
 %{__install} -m 640 %{SOURCE2} %{buildroot}/etc/yugabytedb/yugabytedb.conf
 ln -s "%{appdir}/bin/yugabyted" "%{buildroot}/usr/bin/yugabyted"
 ln -s "%{appdir}/bin/cqlsh" "%{buildroot}/usr/bin/cqlsh"
