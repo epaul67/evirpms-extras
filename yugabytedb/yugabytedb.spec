@@ -63,6 +63,7 @@ YugabyteDB is a free and open-source, distributed, relational, NewSQL database m
 rm -rf %{buildroot}
 
 mkdir -p %{buildroot}
+mkdir -p %{buildroot}/etc/yugabytedb
 mkdir -p %{buildroot}/lib/systemd/system
 mkdir -p %{buildroot}/usr/bin
 mkdir -p %{buildroot}%{appdir}
