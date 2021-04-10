@@ -4,8 +4,8 @@ Release:        1%{?dist}
 Summary:        Personal job scheduler
 
 License:        GPLv2+
-URL:            http://vicerveza.homeunix.net/~viric/soft/ts
-Source0:        %{url}/ts-%{version}.tar.gz
+URL:            https://vicerveza.homeunix.net/~viric/soft/ts
+Source0:         %{url}/ts-%{version}.tar.gz
 
 BuildRequires: make
 BuildRequires:  gcc
