@@ -1,0 +1,12 @@
+https://github.com/saltstack/libnacl/issues/126
+--- ./libnacl/__init__.py.orig	2020-11-03 21:35:02.000000000 +0000
++++ ./libnacl/__init__.py	2021-05-07 01:10:06.033746926 +0100
+@@ -1195,7 +1195,7 @@ def crypto_kdf_derive_from_key(subkey_si
+     """
+     size = int(subkey_size)
+     buf = ctypes.create_string_buffer(size)
+-    nacl.crypto_kdf_derive_from_key(buf, subkey_size, subkey_id, context, master_key)
++    nacl.crypto_kdf_derive_from_key(buf, subkey_size, ctypes.c_ulonglong(subkey_id), context, master_key)
+     return buf.raw
+ 
+ 
