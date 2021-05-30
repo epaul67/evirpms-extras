@@ -3,7 +3,7 @@
 
 %global srcname libnacl
 
-Name:           python3-%{srcname}
+Name:           python-%{srcname}
 Version:        1.7.2
 Release:        3%{?dist}
 Summary:        Python bindings for libsodium based on ctypes
