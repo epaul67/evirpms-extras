@@ -1,7 +1,7 @@
 # Build python3 package for Fedora and EPEL7+
 %{!?python3_pkgversion: %global python3_pkgversion 3}
 
-%global python python3
+%global python python
 %global with_python3 1
 
 # Fix private-shared-object-provides error
@@ -54,7 +54,7 @@ Requires:       python3-bson = %{version}-%{release}
 %description -n python3-pymongo
 The Python driver for MongoDB.  This package contains the python3 version of
 this module.
-%endif # with_python3
+%endif
 
 %package gridfs
 Summary:        Python GridFS driver for MongoDB
@@ -75,7 +75,7 @@ Requires:       python3-pymongo%{?_isa} = %{version}-%{release}
 %description -n python3-pymongo-gridfs
 GridFS is a storage specification for large objects in MongoDB.  This package
 contains the python3 version of this module.
-%endif # with_python3
+%endif
 
 %package -n %{python}-bson
 Summary:        Python bson library
@@ -96,7 +96,7 @@ BSON is a binary-encoded serialization of JSON-like documents. BSON is designed
 to be lightweight, traversable, and efficient. BSON, like JSON, supports the
 embedding of objects and arrays within other objects and arrays.  This package
 contains the python3 version of this module.
-%endif # with_python3
+%endif
 
 %prep
 %setup -q -n pymongo-%{version}
@@ -110,7 +110,7 @@ rm pymongo/ssl_match_hostname.py
 rm -rf %{py3dir}
 cp -a . %{py3dir}
 2to3 --write --nobackups --no-diffs %{py3dir}
-%endif # with_python3
+%endif
 
 %build
 CFLAGS="%{optflags}" %{__python2} setup.py build
@@ -119,7 +119,7 @@ CFLAGS="%{optflags}" %{__python2} setup.py build
 pushd %{py3dir}
 CFLAGS="%{optflags}" %{__python3} setup.py build
 popd
-%endif # with_python3
+%endif
 
 %install
 rm -rf %{buildroot}
@@ -135,7 +135,7 @@ pushd %{py3dir}
 chmod 755 %{buildroot}%{python3_sitearch}/bson/*.so
 chmod 755 %{buildroot}%{python3_sitearch}/pymongo/*.so
 popd
-%endif # with_python3
+%endif
 
 %clean
 rm -rf %{buildroot}
@@ -152,7 +152,7 @@ rm -rf %{buildroot}
 %doc LICENSE PKG-INFO README.rst doc
 %{python3_sitearch}/pymongo
 %{python3_sitearch}/pymongo-%{version}-*.egg-info
-%endif # with_python3
+%endif
 
 %files gridfs
 %defattr(-,root,root,-)
@@ -164,7 +164,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 %doc LICENSE PKG-INFO README.rst doc
 %{python3_sitearch}/gridfs
-%endif # with_python3
+%endif
 
 %files -n %{python}-bson
 %defattr(-,root,root,-)
@@ -176,7 +176,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 %doc LICENSE PKG-INFO README.rst doc
 %{python3_sitearch}/bson
-%endif # with_python3
+%endif
 
 %check
 %if 0%{?rhel} && 0%{?rhel} <= 6
