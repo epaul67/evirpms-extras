@@ -29,11 +29,7 @@ Provides:       pymongo = %{version}-%{release}
 Obsoletes:      pymongo <= 2.1.1-4
 
 BuildRequires:  %{python}-devel
-#BuildRequires:  %{python}-nose
 BuildRequires:  %{python}-setuptools
-%if 0%{?rhel} && 0%{?rhel} <= 6
-#BuildRequires:  python-unittest2
-%endif
 BuildRequires:  python-backports-ssl_match_hostname
 Requires:       python-backports-ssl_match_hostname
 
@@ -41,7 +37,7 @@ Requires:       python-backports-ssl_match_hostname
 BuildRequires:  python-tools
 BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
-%endif # if with_python3
+%endif
 
 # Mongodb must run on a little-endian CPU (see bug #630898)
 ExcludeArch:    ppc ppc64 %{sparc} s390 s390x
