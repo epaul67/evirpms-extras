@@ -12,7 +12,7 @@
 
 Name:           %{python}-pymongo
 Version:        3.7.2
-Release:        1.nw%{?dist}
+Release:        1%{?dist}
 Summary:        Python driver for MongoDB
 
 Group:          Development/Languages
