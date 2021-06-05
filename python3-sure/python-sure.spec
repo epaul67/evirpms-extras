@@ -48,10 +48,10 @@ Requires:       %{?scl_prefix}python-six
 
 %if 0%{with_python3}
 BuildRequires:  %{?scl_prefix}python3-devel
-BuildRequires:  %{?scl_prefix}python3-mock
-BuildRequires:  %{?scl_prefix}python3-nose
 BuildRequires:  %{?scl_prefix}python3-setuptools
-BuildRequires:  %{?scl_prefix}python3-six
+BuildRequires:  %{?scl_prefix}python36-six
+BuildRequires:  %{?scl_prefix}python36-mock
+BuildRequires:  %{?scl_prefix}python36-nose
 %endif
 
 %description
