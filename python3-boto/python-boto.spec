@@ -49,11 +49,11 @@ Patch10:	boto-2.45.0-modifysubnetattribute.patch
 
 BuildRequires:	python3-devel
 BuildRequires:	python3-setuptools
-BuildRequires:	python3-six
 BuildRequires:	python3-httpretty
-BuildRequires:	python3-mock
-BuildRequires:	python3-nose
-BuildRequires:	python3-requests
+BuildRequires:	python36-six
+BuildRequires:	python36-mock
+BuildRequires:	python36-nose
+BuildRequires:	python36-requests
 
 BuildArch:	noarch
 
