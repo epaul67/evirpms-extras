@@ -47,28 +47,28 @@ rm -rf tests/integration
 %{python3_sitelib}/%{pypi_name}-%{version}-*.egg-info/
 
 %changelog
-* Thu Oct  8 14:31:50 CDT 2020 Gwyn Ciesla <gwync@protonmail.com> - 1.15.15-1
+* Thu Oct  8 2020 Gwyn Ciesla <gwync@protonmail.com> - 1.15.15-1
 - 1.15.15
 
-* Thu Oct  8 09:00:53 CDT 2020 Gwyn Ciesla <gwync@protonmail.com> - 1.15.14-1
+* Thu Oct  8 2020 Gwyn Ciesla <gwync@protonmail.com> - 1.15.14-1
 - 1.15.14
 
-* Wed Oct  7 08:56:59 CDT 2020 Gwyn Ciesla <gwync@protonmail.com> - 1.15.13-1
+* Wed Oct  7 2020 Gwyn Ciesla <gwync@protonmail.com> - 1.15.13-1
 - 1.15.13
 
-* Fri Oct  2 15:35:15 CDT 2020 Gwyn Ciesla <gwync@protonmail.com> - 1.15.11-1
+* Fri Oct  2 2020 Gwyn Ciesla <gwync@protonmail.com> - 1.15.11-1
 - 1.15.11
 
-* Fri Oct  2 08:20:02 CDT 2020 Gwyn Ciesla <gwync@protonmail.com> - 1.15.10-1
+* Fri Oct  2 2020 Gwyn Ciesla <gwync@protonmail.com> - 1.15.10-1
 - 1.15.10
 
-* Thu Oct  1 08:15:53 CDT 2020 Gwyn Ciesla <gwync@protonmail.com> - 1.15.9-1
+* Thu Oct  1 2020 Gwyn Ciesla <gwync@protonmail.com> - 1.15.9-1
 - 1.15.9
 
-* Wed Sep 30 09:04:06 CDT 2020 Gwyn Ciesla <gwync@protonmail.com> - 1.15.8-1
+* Wed Sep 30 2020 Gwyn Ciesla <gwync@protonmail.com> - 1.15.8-1
 - 1.15.8
 
-* Tue Sep 29 09:14:56 CDT 2020 Gwyn Ciesla <gwync@protonmail.com> - 1.15.7-1
+* Tue Sep 29 2020 Gwyn Ciesla <gwync@protonmail.com> - 1.15.7-1
 - 1.15.7
 
 * Mon Sep 28 2020 Gwyn Ciesla <gwync@protonmail.com> - 1.15.6-1
