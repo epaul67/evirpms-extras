@@ -7,7 +7,7 @@ Summary:        Python API client library for Netbox
 
 License:        ASL 2.0
 URL:            https://github.com/digitalocean/pynetbox
-Source:         %{pypi_source}
+Source:         https://github.com/netbox-community/pynetbox/archive/refs/tags/v%{version}.tar.gz
 
 BuildArch:      noarch
 
