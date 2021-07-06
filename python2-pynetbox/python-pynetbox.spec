@@ -20,7 +20,7 @@ BuildArch:      noarch
 Summary:        %{summary}
 %{?python_provide:%python_provide python2-%{srcname}}
 BuildRequires:  python2-devel
-BuildRequires:  python1-setuptools
+BuildRequires:  python-setuptools
 BuildRequires:  python-requests
 BuildRequires:  python-six
 Requires:       python-requests
