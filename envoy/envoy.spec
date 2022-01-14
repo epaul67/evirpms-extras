@@ -46,8 +46,6 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 %{_bindir}/*
 /opt/glibc-%{glibc_version}
-%license LICENSE
-
 
 %changelog
 * Thu Jan 14 2022 Pablo Ruiz <pablo.ruiz@gmail.com> - 1.18.4
