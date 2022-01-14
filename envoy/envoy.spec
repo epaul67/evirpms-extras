@@ -30,7 +30,7 @@ pushd glibc-build
 make -j4
 popd
 
-./bin/patchelf patchelf --set-interpreter /opt/glibc-2.18/lib/ld-linux-x86-64.so.2 --set-rpath envoy-v%{version}-linux-amd64/bin/envoy
+./bin/patchelf --set-interpreter /opt/glibc-2.18/lib/ld-linux-x86-64.so.2 --set-rpath envoy-v%{version}-linux-amd64/bin/envoy
 
 %install
 rm -rf %{buildroot}
