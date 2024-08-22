@@ -15,12 +15,20 @@
 %global __jar_repack /bin/true
 
 Name: yugabytedb
-Version: 2.5.2.0
+Version: 2.20.5.0
+%define subversion b72
 Release: 1%{?dist}
-Source0: https://downloads.yugabyte.com/yugabyte-%{version}-linux.tar.gz
+Source0: https://downloads.yugabyte.com/releases/%{version}/yugabyte-%{version}-%{subversion}-linux-x86_64.tar.gz
 Source1: yugabyted.service
 Source2: yugabytedb.conf
 Source3: yugabyte-client-post_install.sh
+Source4: yb-check-consistency.py
+Source5: yb-ctl
+Source6: yugabyted
+Source7: yb-check-failed-tablets.sh
+Source8: print_stacks.sh
+Source9: yb-prof.py
+Source10: pprof
 Summary: YugabyteDB is a free and open-source, distributed, relational, NewSQL database management system
 Group: default
 License: Apache 2.0
@@ -33,7 +41,7 @@ YugabyteDB is a free and open-source, distributed, relational, NewSQL database m
 
 %package server
 Summary: YugabyteDB is a free and open-source, distributed, relational, NewSQL database management system
-Requires: python python-libs python-devel python2-pip
+Requires: python python-libs python-devel python3-pip
 Requires: procps-ng
 %if 0%{?rhel} < 8
 BuildRequires: systemd
@@ -60,14 +68,24 @@ YugabyteDB is a free and open-source, distributed, relational, NewSQL database m
 # noop
 
 %install
-rm -rf %{buildroot}
+
 
 mkdir -p %{buildroot}
 mkdir -p %{buildroot}/etc/yugabytedb
 mkdir -p %{buildroot}/lib/systemd/system
 mkdir -p %{buildroot}/usr/bin
 mkdir -p %{buildroot}%{appdir}
+mkdir -p %{buildroot}%{appdir}/bin
+mkdir -p %{buildroot}%{appdir}/tools
+cp -a ../../SOURCES/yb-check-consistency.py %{buildroot}%{appdir}/bin/
+cp -a ../../SOURCES/yb-ctl %{buildroot}%{appdir}/bin/
+cp -a ../../SOURCES/yugabyted %{buildroot}%{appdir}/bin/
+cp -a ../../SOURCES/pprof %{buildroot}%{appdir}/bin/
+cp -a ../../SOURCES/yb-check-failed-tablets.sh %{buildroot}%{appdir}/tools/
+cp -a ../../SOURCES/print_stacks.sh %{buildroot}%{appdir}/tools/
+cp -a ../../SOURCES/yb-prof.py %{buildroot}%{appdir}/tools/
 
+# rm -rf %{buildroot}
 
 %{__install} -m 644 %{SOURCE1} %{buildroot}/lib/systemd/system/yugabyted.service
 %{__install} -d -m 640 %{buildroot}/var/log/yugabytedb
@@ -80,8 +98,8 @@ ln -s "%{appdir}/bin/ysqlsh" "%{buildroot}/usr/bin/ysqlsh"
 ln -s "%{appdir}/bin/ycqlsh" "%{buildroot}/usr/bin/ycqlsh"
 
 #chown -R 301:301 . %{buildroot}/etc/yugabytedb %{buildroot}/var/log/yugabytedb %{buildroot}/var/lib/yugabytedb
-
-mv * %{buildroot}%{appdir}/
+ls
+mv -n * %{buildroot}%{appdir}/
 
 %{__install} -m 755 %{SOURCE3} %{buildroot}/opt/yugabytedb/bin/post_client_install.sh
 
@@ -154,6 +172,7 @@ fi
 %dir %attr(750,301,301) /var/lib/yugabytedb
 /lib/systemd/system/yugabyted.service
 /usr/bin/yugabyted
+/opt/yugabytedb/*
 /opt/yugabytedb/*
 
 %files client
