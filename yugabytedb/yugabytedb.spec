@@ -69,8 +69,7 @@ mkdir -p %{buildroot}/lib/systemd/system
 mkdir -p %{buildroot}/usr/bin
 mkdir -p %{buildroot}%{appdir}
 mkdir -p %{buildroot}%{appdir}/bin
-mkdir -p %{buildroot}%{appdir}/bin/cqlsh
-mkdir -p %{buildroot}%{appdir}/bin/ycqlsh
+ls -al %{buildroot}%{appdir}/bin/
 mkdir -p %{buildroot}%{appdir}/tools
 
 # rm -rf %{buildroot}
