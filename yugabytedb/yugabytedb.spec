@@ -169,10 +169,8 @@ fi
 %config(noreplace) %attr(640,301,301) /etc/yugabytedb/yugabytedb.conf
 %dir /opt/yugabytedb
 %dir %attr(750,301,301) /var/log/yugabytedb
-%dir %attr(750,301,301) /var/lib/yugabytedb
 /lib/systemd/system/yugabyted.service
 /usr/bin/yugabyted
-/opt/yugabytedb/*
 /opt/yugabytedb/*
 
 %files client
