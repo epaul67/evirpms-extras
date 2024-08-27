@@ -71,6 +71,7 @@ mkdir -p %{buildroot}%{appdir}
 mkdir -p %{buildroot}%{appdir}/bin
 ls -al %{buildroot}%{appdir}/bin/
 mkdir -p %{buildroot}%{appdir}/tools
+ls -al %{buildroot}/usr/bin/
 
 # rm -rf %{buildroot}
 
