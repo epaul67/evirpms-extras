@@ -22,13 +22,6 @@ Source0: https://downloads.yugabyte.com/releases/%{version}/yugabyte-%{version}-
 Source1: yugabyted.service
 Source2: yugabytedb.conf
 Source3: yugabyte-client-post_install.sh
-Source4: yb-check-consistency.py
-Source5: yb-ctl
-Source6: yugabyted
-Source7: yb-check-failed-tablets.sh
-Source8: print_stacks.sh
-Source9: yb-prof.py
-Source10: pprof
 Summary: YugabyteDB is a free and open-source, distributed, relational, NewSQL database management system
 Group: default
 License: Apache 2.0
@@ -77,13 +70,6 @@ mkdir -p %{buildroot}/usr/bin
 mkdir -p %{buildroot}%{appdir}
 mkdir -p %{buildroot}%{appdir}/bin
 mkdir -p %{buildroot}%{appdir}/tools
-cp -a ../../SOURCES/yb-check-consistency.py %{buildroot}%{appdir}/bin/
-cp -a ../../SOURCES/yb-ctl %{buildroot}%{appdir}/bin/
-cp -a ../../SOURCES/yugabyted %{buildroot}%{appdir}/bin/
-cp -a ../../SOURCES/pprof %{buildroot}%{appdir}/bin/
-cp -a ../../SOURCES/yb-check-failed-tablets.sh %{buildroot}%{appdir}/tools/
-cp -a ../../SOURCES/print_stacks.sh %{buildroot}%{appdir}/tools/
-cp -a ../../SOURCES/yb-prof.py %{buildroot}%{appdir}/tools/
 
 # rm -rf %{buildroot}
 
