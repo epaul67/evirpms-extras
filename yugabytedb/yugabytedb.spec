@@ -85,7 +85,12 @@ ln -s "%{appdir}/bin/ysqlsh" "%{buildroot}/usr/bin/ysqlsh"
 #chown -R 301:301 . %{buildroot}/etc/yugabytedb %{buildroot}/var/log/yugabytedb %{buildroot}/var/lib/yugabytedb
 mv * %{buildroot}%{appdir}/
 
-# sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' *
+sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' /opt/yugabytedb/bin/yugabyted
+sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' /opt/yugabytedb/bin/yb-ctl
+sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' /opt/yugabytedb/tools/yb-prof.py
+sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' /opt/yugabytedb/tools/k8s_preflight.py
+sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' /opt/yugabytedb/tools/k8s_parent.py
+sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' /opt/yugabytedb/tools/k8s_ybc_parent.py
 
 %{__install} -m 755 %{SOURCE3} %{buildroot}/opt/yugabytedb/bin/post_client_install.sh
 
