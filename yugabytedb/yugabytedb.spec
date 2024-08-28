@@ -69,9 +69,7 @@ mkdir -p %{buildroot}/lib/systemd/system
 mkdir -p %{buildroot}/usr/bin
 mkdir -p %{buildroot}%{appdir}
 mkdir -p %{buildroot}%{appdir}/bin
-ls -al %{buildroot}%{appdir}/bin/
 mkdir -p %{buildroot}%{appdir}/tools
-ls -al %{buildroot}/usr/bin/
 
 # rm -rf %{buildroot}
 
@@ -85,8 +83,7 @@ ln -s "%{appdir}/bin/cqlsh" "%{buildroot}/usr/bin/cqlsh"
 ln -s "%{appdir}/bin/ysqlsh" "%{buildroot}/usr/bin/ysqlsh"
 
 #chown -R 301:301 . %{buildroot}/etc/yugabytedb %{buildroot}/var/log/yugabytedb %{buildroot}/var/lib/yugabytedb
-ls
-mv -n * %{buildroot}%{appdir}/
+# mv -n * %{buildroot}%{appdir}/
 
 %{__install} -m 755 %{SOURCE3} %{buildroot}/opt/yugabytedb/bin/post_client_install.sh
 
