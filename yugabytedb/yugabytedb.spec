@@ -85,12 +85,12 @@ ln -s "%{appdir}/bin/ysqlsh" "%{buildroot}/usr/bin/ysqlsh"
 #chown -R 301:301 . %{buildroot}/etc/yugabytedb %{buildroot}/var/log/yugabytedb %{buildroot}/var/lib/yugabytedb
 mv * %{buildroot}%{appdir}/
 
-sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{appdir}/bin/yugabyted
-sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{appdir}/bin/yb-ctl
-sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{appdir}/tools/yb-prof.py
-sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{appdir}/tools/k8s_preflight.py
-sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{appdir}/tools/k8s_parent.py
-sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{appdir}/tools/k8s_ybc_parent.py
+sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/bin/yugabyted
+sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/bin/yb-ctl
+sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/tools/yb-prof.py
+sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/tools/k8s_preflight.py
+sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/tools/k8s_parent.py
+sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/tools/k8s_ybc_parent.py
 
 %{__install} -m 755 %{SOURCE3} %{buildroot}/opt/yugabytedb/bin/post_client_install.sh
 
