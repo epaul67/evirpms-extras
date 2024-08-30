@@ -96,6 +96,7 @@ ls -al /builddir/build/BUILDROOT/yugabytedb-2.20.5.0-1.el9.x86_64/opt/yugabytedb
 
 %{__install} -m 755 %{SOURCE3} %{buildroot}/opt/yugabytedb/bin/post_client_install.sh
 
+ls -al /builddir/build/BUILDROOT/yugabytedb-2.20.5.0-1.el9.x86_64/opt/yugabytedb/bin/
 %clean
 # noop
 
