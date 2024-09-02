@@ -110,6 +110,8 @@ getent passwd yugabyte >/dev/null || \
 	-s /sbin/nologin \
     	-c "YugaByte database" yugabyte
 
+cat /etc/passwd |grep yugabyte
+
 %pre client
 getent group yugabyte >/dev/null 2>&1 || groupadd -r -g 301 yugabyte 
 getent passwd yugabyte >/dev/null || \
