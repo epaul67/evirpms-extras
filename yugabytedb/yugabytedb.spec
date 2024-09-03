@@ -78,9 +78,9 @@ mkdir -p %{buildroot}%{appdir}/tools
 %{__install} -d -m 640 %{buildroot}/var/lib/yugabytedb
 ls -l %{buildroot} %{buildroot}/etc %{buildroot}/etc/yugabytedb
 %{__install} -m 640 %{SOURCE2} %{buildroot}/etc/yugabytedb/yugabytedb.conf
-ln -s "%{buildroot}/%{appdir}/bin/yugabyted" "%{buildroot}/usr/bin/yugabyted"
-ln -s "%{buildroot}/%{appdir}/bin/cqlsh" "%{buildroot}/usr/bin/cqlsh"
-ln -s "%{buildroot}/%{appdir}/bin/ysqlsh" "%{buildroot}/usr/bin/ysqlsh"
+ln -s "%{appdir}/bin/yugabyted" "%{buildroot}/usr/bin/yugabyted"
+ln -s "%{appdir}/bin/cqlsh" "%{buildroot}/usr/bin/cqlsh"
+ln -s "%{appdir}/bin/ysqlsh" "%{buildroot}/usr/bin/ysqlsh"
 
 #chown -R 301:301 . %{buildroot}/etc/yugabytedb %{buildroot}/var/log/yugabytedb %{buildroot}/var/lib/yugabytedb
 mv * %{buildroot}%{appdir}/
