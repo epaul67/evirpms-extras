@@ -81,7 +81,7 @@ ls -l %{buildroot} %{buildroot}/etc %{buildroot}/etc/yugabytedb
 ln -s "%{appdir}/bin/yugabyted" "%{buildroot}/usr/bin/yugabyted"
 ln -s "%{appdir}/bin/cqlsh" "%{buildroot}/usr/bin/cqlsh"
 ln -s "%{appdir}/bin/ysqlsh" "%{buildroot}/usr/bin/ysqlsh"
-
+ls -alh "%{appdir}/bin/"
 #chown -R 301:301 . %{buildroot}/etc/yugabytedb %{buildroot}/var/log/yugabytedb %{buildroot}/var/lib/yugabytedb
 mv * %{buildroot}%{appdir}/
 ls -al %{buildroot}/opt/yugabytedb
