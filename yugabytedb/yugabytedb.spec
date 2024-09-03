@@ -100,6 +100,8 @@ ls -al /builddir/build/BUILDROOT/yugabytedb-2.20.5.0-1.el9.x86_64/opt/yugabytedb
 %clean
 # noop
 
+%define debug_package %{nil}
+
 %pre server
 getent group yugabyte >/dev/null 2>&1 || groupadd -r -g 301 yugabyte 
 getent passwd yugabyte >/dev/null || \
@@ -109,8 +111,6 @@ getent passwd yugabyte >/dev/null || \
 	-d /var/lib/yugabytedb \
 	-s /sbin/nologin \
     	-c "YugaByte database" yugabyte
-
-cat /etc/passwd |grep yugabyte
 
 %pre client
 getent group yugabyte >/dev/null 2>&1 || groupadd -r -g 301 yugabyte 
