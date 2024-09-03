@@ -78,10 +78,10 @@ mkdir -p %{buildroot}%{appdir}/tools
 %{__install} -d -m 640 %{buildroot}/var/lib/yugabytedb
 ls -l %{buildroot} %{buildroot}/etc %{buildroot}/etc/yugabytedb
 %{__install} -m 640 %{SOURCE2} %{buildroot}/etc/yugabytedb/yugabytedb.conf
-ln -s "%{appdir}/bin/yugabyted" "%{buildroot}/usr/bin/yugabyted"
-ln -s "%{appdir}/bin/cqlsh" "%{buildroot}/usr/bin/cqlsh"
-ln -s "%{appdir}/bin/ysqlsh" "%{buildroot}/usr/bin/ysqlsh"
-ls -alh "%{appdir}/bin/"
+ln -s "%{buildroot}/%{appdir}/bin/yugabyted" "%{buildroot}/usr/bin/yugabyted"
+ln -s "%{buildroot}/%{appdir}/bin/cqlsh" "%{buildroot}/usr/bin/cqlsh"
+ln -s "%{buildroot}/%{appdir}/bin/ysqlsh" "%{buildroot}/usr/bin/ysqlsh"
+
 #chown -R 301:301 . %{buildroot}/etc/yugabytedb %{buildroot}/var/log/yugabytedb %{buildroot}/var/lib/yugabytedb
 mv * %{buildroot}%{appdir}/
 ls -al %{buildroot}/opt/yugabytedb
@@ -111,6 +111,7 @@ getent passwd yugabyte >/dev/null || \
 	-d /var/lib/yugabytedb \
 	-s /sbin/nologin \
     	-c "YugaByte database" yugabyte
+
 
 %pre client
 getent group yugabyte >/dev/null 2>&1 || groupadd -r -g 301 yugabyte 
