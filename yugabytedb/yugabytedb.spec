@@ -7,7 +7,7 @@
 
 # Use gzip payload compression
 %define _binary_payload w9.gzdio 
-
+%define _build_id_links none
 %define appdir /opt/yugabytedb
 
 %global debug_package %{nil}
