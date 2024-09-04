@@ -90,14 +90,13 @@ sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/opt/yugabyte
 sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/opt/yugabytedb/tools/k8s_ybc_parent.py
 
 # Find dead symlinks and repoint them to right path
-... find %{buildroot} -xtype 1 -exec ...
+for dir in {a..z}; do     find "/builddir/build/BUILDROOT/yugabytedb-2.20.5.0-1.el9.x86_64/opt/yugabytedb/linuxbrew/Cellar/ncurses/6.1/share/terminfo/$dir/" -xtype l -exec rm "{}" \;; done
 
 ls -al /builddir/build/BUILDROOT/yugabytedb-2.20.5.0-1.el9.x86_64/opt/yugabytedb/bin/
 
 %{__install} -m 755 %{SOURCE3} %{buildroot}/opt/yugabytedb/bin/post_client_install.sh
 
 find /builddir/build/BUILDROOT/yugabytedb-2.20.5.0-1.el9.x86_64/opt/yugabytedb/bin/
-for dir in {a..z}; do     find "/builddir/build/BUILDROOT/yugabytedb-2.20.5.0-1.el9.x86_64/opt/yugabytedb/linuxbrew/Cellar/ncurses/6.1/share/terminfo/$dir/" -xtype l -exec rm "{}" \;; done
 
 %clean
 # noop
