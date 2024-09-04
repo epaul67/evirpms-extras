@@ -3,6 +3,7 @@
 %define _binary_filedigest_algorithm 1
 # This is the macro I find on OSX when Homebrew provides rpmbuild (rpm v5.4.14)
 %define _build_binary_file_digest_algo 1
+%define debug_package %{nil}
 
 # Use gzip payload compression
 %define _binary_payload w9.gzdio 
@@ -69,7 +70,7 @@ mkdir -p %{buildroot}/usr/bin
 mkdir -p %{buildroot}%{appdir}
 mkdir -p %{buildroot}%{appdir}/bin
 mkdir -p %{buildroot}%{appdir}/tools
-mkdir -p %{buildroot}%{appdir}/linuxbrew/Cellar/ncurses/6.1/share/terminfo/y
+mkdir -p %{buildroot}%{appdir}/linuxbrew/Cellar/ncurses/6.1/share/terminfo/y/
 
 
 %{__install} -m 644 %{SOURCE1} %{buildroot}/lib/systemd/system/yugabyted.service
@@ -82,7 +83,7 @@ ln -s "%{appdir}/bin/cqlsh" "%{buildroot}/usr/bin/cqlsh"
 ln -s "%{appdir}/bin/ysqlsh" "%{buildroot}/usr/bin/ysqlsh"
 
 #chown -R 301:301 . %{buildroot}/etc/yugabytedb %{buildroot}/var/log/yugabytedb %{buildroot}/var/lib/yugabytedb
-mv -n * %{buildroot}%{appdir}/
+mv * %{buildroot}%{appdir}/
 ls -al %{buildroot}/opt/yugabytedb
 sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/opt/yugabytedb/bin/yugabyted
 sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/opt/yugabytedb/bin/yb-ctl
@@ -92,7 +93,7 @@ sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/opt/yugabyte
 sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/opt/yugabytedb/tools/k8s_ybc_parent.py
 
 # Find dead symlinks and repoint them to right path
-for dir in {a..z}; do     find "/builddir/build/BUILDROOT/yugabytedb-2.20.5.0-1.el9.x86_64/opt/yugabytedb/linuxbrew/Cellar/ncurses/6.1/share/terminfo/$dir/" -xtype l -exec rm "{}" \;; done
+for dir in {a..z}; do     find "%{buildroot}%{appdir}/linuxbrew/Cellar/ncurses/6.1/share/terminfo/$dir/" -xtype l -exec rm "{}" \;; done
 
 ls -al /builddir/build/BUILDROOT/yugabytedb-2.20.5.0-1.el9.x86_64/opt/yugabytedb/bin/
 
@@ -102,8 +103,6 @@ find /builddir/build/BUILDROOT/yugabytedb-2.20.5.0-1.el9.x86_64/opt/yugabytedb/b
 
 %clean
 # noop
-
-%define debug_package %{nil}
 
 %pre server
 getent group yugabyte >/dev/null 2>&1 || groupadd -r -g 301 yugabyte 
