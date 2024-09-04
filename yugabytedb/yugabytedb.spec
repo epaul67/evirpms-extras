@@ -16,7 +16,7 @@
 
 Name: yugabytedb
 Version: 2.20.6.0
-%define subversion b72
+%define subversion b66
 Release: 1%{?dist}
 Source0: https://downloads.yugabyte.com/releases/%{version}/yugabyte-%{version}-%{subversion}-linux-x86_64.tar.gz
 Source1: yugabyted.service
