@@ -96,6 +96,8 @@ sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/opt/yugabyte
 mkdir -p %{buildroot}%{appdir}/linuxbrew/Cellar/ncurses/6.1/share/terminfo/y
 # Find dead symlinks and repoint them to right path
 for dir in {a..z}; do     find "%{buildroot}%{appdir}/linuxbrew/Cellar/ncurses/6.1/share/terminfo/$dir/" -xtype l -exec rm "{}" \;; done
+for dir in {A..Z}; do     find "%{buildroot}%{appdir}/linuxbrew/Cellar/ncurses/6.1/share/terminfo/$dir/" -xtype l -exec rm "{}" \;; done
+for dir in {1..9}; do     find "%{buildroot}%{appdir}/linuxbrew/Cellar/ncurses/6.1/share/terminfo/$dir/" -xtype l -exec rm "{}" \;; done
 
 ls -al /builddir/build/BUILDROOT/yugabytedb-2.20.6.0-1.el9.x86_64/opt/yugabytedb/bin/
 
