@@ -82,7 +82,7 @@ ln -s "%{appdir}/bin/cqlsh" "%{buildroot}/usr/bin/cqlsh"
 ln -s "%{appdir}/bin/ysqlsh" "%{buildroot}/usr/bin/ysqlsh"
 
 #chown -R 301:301 . %{buildroot}/etc/yugabytedb %{buildroot}/var/log/yugabytedb %{buildroot}/var/lib/yugabytedb
-mv * %{buildroot}%{appdir}/
+mv -n * %{buildroot}%{appdir}/
 ls -al %{buildroot}/opt/yugabytedb
 sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/opt/yugabytedb/bin/yugabyted
 sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/opt/yugabytedb/bin/yb-ctl
