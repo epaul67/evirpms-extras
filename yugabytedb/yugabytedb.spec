@@ -95,11 +95,11 @@ sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/opt/yugabyte
 # Find dead symlinks and repoint them to right path
 for dir in {a..z}; do     find "%{buildroot}%{appdir}/linuxbrew/Cellar/ncurses/6.1/share/terminfo/$dir/" -xtype l -exec rm "{}" \;; done
 
-ls -al /builddir/build/BUILDROOT/yugabytedb-2.20.5.0-1.el9.x86_64/opt/yugabytedb/bin/
+ls -al /builddir/build/BUILDROOT/yugabytedb-2.20.6.0-1.el9.x86_64/opt/yugabytedb/bin/
 
 %{__install} -m 755 %{SOURCE3} %{buildroot}/opt/yugabytedb/bin/post_client_install.sh
 
-find /builddir/build/BUILDROOT/yugabytedb-2.20.5.0-1.el9.x86_64/opt/yugabytedb/bin/
+find /builddir/build/BUILDROOT/yugabytedb-2.20.6.0-1.el9.x86_64/opt/yugabytedb/bin/
 
 %clean
 # noop
