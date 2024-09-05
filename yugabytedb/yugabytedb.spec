@@ -92,9 +92,9 @@ sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/opt/yugabyte
 # chown -R 301:301 . %{buildroot}/etc/yugabytedb %{buildroot}/var/log/yugabytedb %{buildroot}/var/lib/yugabytedb
 
 # Find dead symlinks and repoint them to right path
- find "%{buildroot}%{appdir}/linuxbrew/Cellar/ncurses/6.1/share/terminfo/" -xtype l -exec rm "{}" \;
-# find "%{buildroot}%{appdir}/linuxbrew/Cellar/ncurses/6.1/share/terminfo/" -xtype l -exec bash -c 'target=$(readlink "{}"); if [[ "$target" ==  /opt/yb-build/brew* ]]; then ln -sf "/opt/yb-build/$(basename "$target")" "{}"; fi' \;
-
+# find "%{buildroot}%{appdir}/linuxbrew/Cellar/ncurses/6.1/share/terminfo/" -xtype l -exec rm "{}" \;
+find %{buildroot}%{appdir}/linuxbrew/Cellar/ncurses/6.1/share/terminfo/ -xtype l -exec bash -c 'ln -sfr $(readlink {}|cut -d"/" -f11-) {};' \;
+ 
 %{__install} -m 755 %{SOURCE3} %{buildroot}/opt/yugabytedb/bin/post_client_install.sh
 
 find /builddir/build/BUILDROOT/yugabytedb-2.20.6.0-1.el9.x86_64/opt/yugabytedb/bin/
