@@ -81,6 +81,7 @@ ls -l %{buildroot} %{buildroot}/etc %{buildroot}/etc/yugabytedb
 ln -s "%{appdir}/bin/yugabyted" "%{buildroot}/usr/bin/yugabyted"
 ln -s "%{appdir}/bin/cqlsh" "%{buildroot}/usr/bin/cqlsh"
 ln -s "%{appdir}/bin/ysqlsh" "%{buildroot}/usr/bin/ysqlsh"
+ln -s "%{appdir}/bin/ycqlsh" "%{buildroot}/usr/bin/ycqlsh"
 
 #chown -R 301:301 . %{buildroot}/etc/yugabytedb %{buildroot}/var/log/yugabytedb %{buildroot}/var/lib/yugabytedb
  
@@ -99,6 +100,7 @@ find "%{buildroot}%{appdir}/linuxbrew/Cellar/ncurses/6.1/share/terminfo/" -xtype
 
 ls -al %{buildroot}/opt/yugabytedb/bin/
 ls -al %{buildroot}/opt/yugabytedb/postgres/bin/
+ls -al %{buildroot}/usr/bin/
 
 %{__install} -m 755 %{SOURCE3} %{buildroot}/opt/yugabytedb/bin/post_client_install.sh
 
