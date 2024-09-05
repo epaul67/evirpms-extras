@@ -75,7 +75,6 @@ mkdir -p %{buildroot}%{appdir}/tools
 %{__install} -m 644 %{SOURCE1} %{buildroot}/lib/systemd/system/yugabyted.service
 %{__install} -d -m 640 %{buildroot}/var/log/yugabytedb
 %{__install} -d -m 640 %{buildroot}/var/lib/yugabytedb
-ls -l %{buildroot} %{buildroot}/etc %{buildroot}/etc/yugabytedb
 %{__install} -m 640 %{SOURCE2} %{buildroot}/etc/yugabytedb/yugabytedb.conf
 ln -s "%{appdir}/bin/yugabyted" "%{buildroot}/usr/bin/yugabyted"
 ln -s "%{appdir}/bin/cqlsh" "%{buildroot}/usr/bin/cqlsh"
@@ -83,7 +82,6 @@ ln -s "%{appdir}/bin/ysqlsh" "%{buildroot}/usr/bin/ysqlsh"
 ln -s "%{appdir}/bin/ycqlsh" "%{buildroot}/usr/bin/ycqlsh"
 
 mv -f * %{buildroot}%{appdir}/
-ls -al %{buildroot}/opt/yugabytedb
 sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/opt/yugabytedb/bin/yugabyted
 sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/opt/yugabytedb/bin/yb-ctl
 sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/opt/yugabytedb/tools/yb-prof.py
@@ -94,11 +92,8 @@ sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/opt/yugabyte
 # chown -R 301:301 . %{buildroot}/etc/yugabytedb %{buildroot}/var/log/yugabytedb %{buildroot}/var/lib/yugabytedb
 
 # Find dead symlinks and repoint them to right path
-find "%{buildroot}%{appdir}/linuxbrew/Cellar/ncurses/6.1/share/terminfo/" -xtype l -exec rm "{}" \;
-
-ls -al %{buildroot}/opt/yugabytedb/bin/
-ls -al %{buildroot}/opt/yugabytedb/postgres/bin/
-ls -al %{buildroot}/usr/bin/
+ find "%{buildroot}%{appdir}/linuxbrew/Cellar/ncurses/6.1/share/terminfo/" -xtype l -exec rm "{}" \;
+# find "%{buildroot}%{appdir}/linuxbrew/Cellar/ncurses/6.1/share/terminfo/" -xtype l -exec bash -c 'target=$(readlink "{}"); if [[ "$target" ==  /opt/yb-build/brew* ]]; then ln -sf "/opt/yb-build/$(basename "$target")" "{}"; fi' \;
 
 %{__install} -m 755 %{SOURCE3} %{buildroot}/opt/yugabytedb/bin/post_client_install.sh
 
@@ -129,7 +124,7 @@ getent passwd yugabyte >/dev/null || \
     	-c "YugaByte database" yugabyte
 
 %post server
-
+chown -R 301:301 . /etc/yugabytedb /var/log/yugabytedb /var/lib/yugabytedb
 # post_install.sh is required after upgrade of the package
 if [ -f "%{appdir}/.post_install.sh.completed" ]; then
   rm "%{appdir}/.post_install.sh.completed"
