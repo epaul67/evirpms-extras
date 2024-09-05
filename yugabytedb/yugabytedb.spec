@@ -91,7 +91,7 @@ sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/opt/yugabyte
 sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/opt/yugabytedb/tools/k8s_parent.py
 sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/opt/yugabytedb/tools/k8s_ybc_parent.py
 
-chown -R 301:301 . %{buildroot}/etc/yugabytedb %{buildroot}/var/log/yugabytedb %{buildroot}/var/lib/yugabytedb
+# chown -R 301:301 . %{buildroot}/etc/yugabytedb %{buildroot}/var/log/yugabytedb %{buildroot}/var/lib/yugabytedb
 
 # Find dead symlinks and repoint them to right path
 find "%{buildroot}%{appdir}/linuxbrew/Cellar/ncurses/6.1/share/terminfo/" -xtype l -exec rm "{}" \;
