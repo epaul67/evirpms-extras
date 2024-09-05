@@ -93,7 +93,7 @@ sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/opt/yugabyte
 
 # Find dead symlinks and repoint them to right path
 # find "%{buildroot}%{appdir}/linuxbrew/Cellar/ncurses/6.1/share/terminfo/" -xtype l -exec rm "{}" \;
-find %{buildroot}%{appdir}/linuxbrew/Cellar/ncurses/6.1/share/terminfo/ -xtype l -exec bash -c 'ln -sfr $(readlink {}|cut -d"/" -f8-) {};' \;
+find %{buildroot}%{appdir}/linuxbrew/Cellar/ncurses/6.1/share/terminfo/ -xtype l -exec bash -c 'ln -sfr $(readlink {}|cut -d"/" -f14-) {};' \;
  
 %{__install} -m 755 %{SOURCE3} %{buildroot}/opt/yugabytedb/bin/post_client_install.sh
 
