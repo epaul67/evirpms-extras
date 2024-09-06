@@ -60,6 +60,17 @@ YugabyteDB is a free and open-source, distributed, relational, NewSQL database m
 %build
 # noop
 
+%pre
+# Create user yugabyte
+getent group yugabyte >/dev/null 2>&1 || groupadd -r -g 301 yugabyte 
+getent passwd yugabyte >/dev/null || \
+    useradd -M -r \
+	-u 301 \
+	-g yugabyte \
+	-d /var/lib/yugabytedb \
+	-s /sbin/nologin \
+    	-c "YugaByte database" yugabyte
+
 %install
 rm -rf %{buildroot}
 
@@ -92,7 +103,6 @@ sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/opt/yugabyte
 # chown -R 301:301 . %{buildroot}/etc/yugabytedb %{buildroot}/var/log/yugabytedb %{buildroot}/var/lib/yugabytedb
 
 # Find dead symlinks and repoint them to right path
-# find "%{buildroot}%{appdir}/linuxbrew/Cellar/ncurses/6.1/share/terminfo/" -xtype l -exec rm "{}" \;
 cd %{buildroot}%{appdir}/linuxbrew/Cellar/ncurses/6.1/share/terminfo/
 find . -xtype l -exec bash -c 'ln -sfr $(readlink {}|cut -d"/" -f11-) {};' \;
  
