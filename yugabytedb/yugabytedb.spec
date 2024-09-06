@@ -62,14 +62,19 @@ YugabyteDB is a free and open-source, distributed, relational, NewSQL database m
 
 %pre
 # Verify if group 'yugabyte' exist; if not, create with GID 301
+echo "Creating user and group yugabyte if not exists"
 if ! getent group yugabyte >/dev/null 2>&1; then
+    echo "Group yugabyte doesn't exist, creating it"
     groupadd -g 301 yugabyte
 fi
 
-# Verify if user 'yugabyte' exist; if not, create with UID 301 and assign to 'yugabyte'
-if ! id "yugabyte" >/dev/null 2>&1; then
-    useradd -u 301 -g 301 -r -s /sbin/nologin -d /var/lib/yugabyte -c "YugaByte database" yugabyte
+if ! getent passwd yugabyte >/dev/null 2>&1; then
+    echo "User yugabyte doesn't exist, creating it"
+    useradd -u 301 -g yugabyte -r -s /sbin/nologin -d /var/lib/yugabyte -c "YugabyteDB User" yugabyte
 fi
+
+getent group yugabyte
+! id "yugabyte"
 
 %install
 rm -rf %{buildroot}
@@ -135,7 +140,7 @@ getent passwd yugabyte >/dev/null || \
     	-c "YugaByte database" yugabyte
 
 %post server
-# chown -R 301:301 /etc/yugabytedb /var/log/yugabytedb /var/lib/yugabytedb
+ chown -R 301:301 /etc/yugabytedb /var/log/yugabytedb /var/lib/yugabytedb
 # post_install.sh is required after upgrade of the package
 if [ -f "%{appdir}/.post_install.sh.completed" ]; then
   rm "%{appdir}/.post_install.sh.completed"
