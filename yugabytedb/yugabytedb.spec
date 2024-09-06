@@ -61,15 +61,15 @@ YugabyteDB is a free and open-source, distributed, relational, NewSQL database m
 # noop
 
 %pre
-# Create user yugabyte
-getent group yugabyte >/dev/null 2>&1 || groupadd -r -g 301 yugabyte 
-getent passwd yugabyte >/dev/null || \
-    useradd -M -r \
-	-u 301 \
-	-g yugabyte \
-	-d /var/lib/yugabytedb \
-	-s /sbin/nologin \
-    	-c "YugaByte database" yugabyte
+# Verify if group 'yugabyte' exist; if not, create with GID 301
+if ! getent group yugabyte >/dev/null 2>&1; then
+    groupadd -g 301 yugabyte
+fi
+
+# Verify if user 'yugabyte' exist; if not, create with UID 301 and assign to 'yugabyte'
+if ! id "yugabyte" >/dev/null 2>&1; then
+    useradd -u 301 -g 301 -r -s /sbin/nologin -d /var/lib/yugabyte -c "YugaByte database" yugabyte
+fi
 
 %install
 rm -rf %{buildroot}
