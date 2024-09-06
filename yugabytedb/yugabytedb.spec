@@ -135,7 +135,7 @@ getent passwd yugabyte >/dev/null || \
     	-c "YugaByte database" yugabyte
 
 %post server
-chown -R 301:301 /etc/yugabytedb /var/log/yugabytedb /var/lib/yugabytedb
+# chown -R 301:301 /etc/yugabytedb /var/log/yugabytedb /var/lib/yugabytedb
 # post_install.sh is required after upgrade of the package
 if [ -f "%{appdir}/.post_install.sh.completed" ]; then
   rm "%{appdir}/.post_install.sh.completed"
