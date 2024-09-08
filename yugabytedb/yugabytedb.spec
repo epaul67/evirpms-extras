@@ -182,7 +182,7 @@ fi
 %dir %attr(755,root,root) /etc/yugabytedb
 %config(noreplace) %attr(640,301,301) /etc/yugabytedb/yugabytedb.conf
 %dir /opt/yugabytedb
-%dir %attr(750,301,301) /var/log/yugabytedb
+%dir %attr(750,yugabyte,yugabayte) /var/log/yugabytedb
 /lib/systemd/system/yugabyted.service
 /usr/bin/yugabyted
 /opt/yugabytedb/*
