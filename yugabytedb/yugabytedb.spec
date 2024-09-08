@@ -141,7 +141,7 @@ getent passwd yugabyte >/dev/null || \
     	-c "YugaByte database" yugabyte
 
 %post server
-# chown -R 301:301 /etc/yugabytedb /var/log/yugabytedb /var/lib/yugabytedb
+chown -R 301:301 /etc/yugabytedb /var/log/yugabytedb /var/lib/yugabytedb
 # post_install.sh is required after upgrade of the package
 if [ -f "%{appdir}/.post_install.sh.completed" ]; then
   rm "%{appdir}/.post_install.sh.completed"
@@ -180,7 +180,7 @@ fi
 %files server
 %defattr(-,root,root,-)
 %dir %attr(755,root,root) /etc/yugabytedb
-config(noreplace) %attr(640,301,301) /etc/yugabytedb/yugabytedb.conf
+%config(noreplace) %attr(640,301,301) /etc/yugabytedb/yugabytedb.conf
 %dir /opt/yugabytedb
 %dir %attr(750,301,301) /var/log/yugabytedb
 /lib/systemd/system/yugabyted.service
