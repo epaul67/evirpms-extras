@@ -72,7 +72,6 @@ if ! getent passwd yugabyte >/dev/null 2>&1; then
     echo "User yugabyte doesn't exist, creating it"
     useradd -u 301 -g yugabyte -r -s /sbin/nologin -d /var/lib/yugabyte -c "YugabyteDB User" yugabyte
 fi
-%dir %attr(750,301,301) /var/log/yugabytedb
 
 getent group yugabyte
 ! id "yugabyte"
@@ -146,6 +145,15 @@ chown -R 301:301 /etc/yugabytedb /var/log/yugabytedb /var/lib/yugabytedb
 if [ -f "%{appdir}/.post_install.sh.completed" ]; then
   rm "%{appdir}/.post_install.sh.completed"
 fi
+# Crear el directorio si no existe
+if [ ! -d /var/log/yugabytedb ]; then
+    mkdir -p /var/log/yugabytedb
+fi
+
+# Aplicar permisos y propietarios
+chown -R 301:301 /var/log/yugabytedb
+chmod 750 /var/log/yugabytedb
+
 %{appdir}/bin/post_install.sh
 
 %systemd_post yugabyted.service
@@ -182,7 +190,7 @@ fi
 %dir %attr(755,root,root) /etc/yugabytedb
 %config(noreplace) %attr(640,301,301) /etc/yugabytedb/yugabytedb.conf
 %dir /opt/yugabytedb
-%dir %attr(750,yugabyte,yugabayte) /var/log/yugabytedb
+%dir %attr(750,301,301) /var/log/yugabytedb
 /lib/systemd/system/yugabyted.service
 /usr/bin/yugabyted
 /opt/yugabytedb/*
