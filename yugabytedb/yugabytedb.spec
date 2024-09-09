@@ -105,11 +105,15 @@ sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/opt/yugabyte
 sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/opt/yugabytedb/tools/k8s_parent.py
 sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/opt/yugabytedb/tools/k8s_ybc_parent.py
 
+# chown -R 301:301 . %{buildroot}/etc/yugabytedb %{buildroot}/var/log/yugabytedb %{buildroot}/var/lib/yugabytedb
+
 # Find dead symlinks and repoint them to right path
 cd %{buildroot}%{appdir}/linuxbrew/Cellar/ncurses/6.1/share/terminfo/
 find . -xtype l -exec bash -c 'ln -sfr $(readlink {}|cut -d"/" -f11-) {};' \;
  
 %{__install} -m 755 %{SOURCE3} %{buildroot}/opt/yugabytedb/bin/post_client_install.sh
+
+find /builddir/build/BUILDROOT/yugabytedb-2.20.6.0-1.el9.x86_64/opt/yugabytedb/bin/
 
 %clean
 # noop
@@ -119,6 +123,23 @@ find . -xtype l -exec bash -c 'ln -sfr $(readlink {}|cut -d"/" -f11-) {};' \;
 if [ ! -d /var/lib/yugabytedb ]; then
     mkdir -p /var/lib/yugabytedb
 fi
+
+# Crear el directorio /var/log/yugabytedb si no existe
+if [ ! -d /var/log/yugabytedb ]; then
+    mkdir -p /var/log/yugabytedb
+fi
+
+# Aplicar permisos y propietarios
+chown -R 301:301 /var/log/yugabytedb
+chmod 750 /var/log/yugabytedb
+
+# Crear el directorio /etc/yugabytedb si no existe
+if [ ! -d /etc/yugabytedb ]; then
+    mkdir -p /etc/yugabytedb
+fi
+## Aplicar permisos y propietarios
+chmod 755 /etc/yugabytedb
+
 getent group yugabyte >/dev/null 2>&1 || groupadd -r -g 301 yugabyte 
 getent passwd yugabyte >/dev/null || \
     useradd -M -r \
@@ -130,10 +151,6 @@ getent passwd yugabyte >/dev/null || \
 
 
 %pre client
-# Crear el directorio /var/lib/yugabytedb si no existe
-if [ ! -d /var/lib/yugabytedb ]; then
-    mkdir -p /var/lib/yugabytedb
-fi
 getent group yugabyte >/dev/null 2>&1 || groupadd -r -g 301 yugabyte 
 getent passwd yugabyte >/dev/null || \
     useradd -M -r \
@@ -184,30 +201,10 @@ fi
 
 %files server
 %defattr(-,root,root,-)
-# Crear el directorio /var/log/yugabytedb si no existe
-if [ ! -d /var/log/yugabytedb ]; then
-    mkdir -p /var/log/yugabytedb
-fi
-
-# Aplicar permisos y propietarios
-chown -R 301:301 /var/log/yugabytedb
-chmod 750 /var/log/yugabytedb
-
-## Crear el directorio /etc/yugabytedb si no existe
-#if [ ! -d /etc/yugabytedb ]; then
-#    mkdir -p /etc/yugabytedb
-#fi
-## Aplicar permisos y propietarios
-#chown 301:301 /etc/yugabytedb
-#chmod 755 /etc/yugabytedb
-
 %dir %attr(755,root,root) /etc/yugabytedb
-%config(noreplace) /etc/yugabytedb/yugabytedb.conf
-chown 301:301 /etc/yugabytedb/yugabytedb.conf
-chmod 640 /etc/yugabytedb/yugabytedb.conf
+%config(noreplace) %attr(640,301,301) /etc/yugabytedb/yugabytedb.conf
 %dir /opt/yugabytedb
 # %dir %attr(750,301,301) /var/log/yugabytedb
-
 /lib/systemd/system/yugabyted.service
 /usr/bin/yugabyted
 /opt/yugabytedb/*
