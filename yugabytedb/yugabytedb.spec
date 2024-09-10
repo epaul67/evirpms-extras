@@ -62,19 +62,14 @@ YugabyteDB is a free and open-source, distributed, relational, NewSQL database m
 
 %pre
 # Verify if group 'yugabyte' exist; if not, create with GID 301
-echo "Creating user and group yugabyte if not exists"
 if ! getent group yugabyte >/dev/null 2>&1; then
-    echo "Group yugabyte doesn't exist, creating it"
     groupadd -g 301 yugabyte
 fi
 
-if ! getent passwd yugabyte >/dev/null 2>&1; then
-    echo "User yugabyte doesn't exist, creating it"
-    useradd -u 301 -g yugabyte -r -s /sbin/nologin -d /var/lib/yugabyte -c "YugabyteDB User" yugabyte
+# Verify if user 'yugabyte' exist; if not, create with UID 301 and assign to 'yugabyte'
+if ! id "yugabyte" >/dev/null 2>&1; then
+    useradd -u 301 -g 301 -r -s /sbin/nologin -d /var/lib/yugabyte -c "YugaByte database" yugabyte
 fi
-
-getent group yugabyte
-! uid "301"
 
 %install
 rm -rf %{buildroot}
@@ -119,27 +114,6 @@ find /builddir/build/BUILDROOT/yugabytedb-2.20.6.0-1.el9.x86_64/opt/yugabytedb/b
 # noop
 
 %pre server
-# Crear el directorio /var/lib/yugabytedb si no existe
-if [ ! -d /var/lib/yugabytedb ]; then
-    mkdir -p /var/lib/yugabytedb
-fi
-
-# Crear el directorio /var/log/yugabytedb si no existe
-if [ ! -d /var/log/yugabytedb ]; then
-    mkdir -p /var/log/yugabytedb
-fi
-
-# Aplicar permisos y propietarios
-chown -R 301:301 /var/log/yugabytedb
-chmod 750 /var/log/yugabytedb
-
-# Crear el directorio /etc/yugabytedb si no existe
-if [ ! -d /etc/yugabytedb ]; then
-    mkdir -p /etc/yugabytedb
-fi
-## Aplicar permisos y propietarios
-chmod 755 /etc/yugabytedb
-
 getent group yugabyte >/dev/null 2>&1 || groupadd -r -g 301 yugabyte 
 getent passwd yugabyte >/dev/null || \
     useradd -M -r \
@@ -161,13 +135,11 @@ getent passwd yugabyte >/dev/null || \
     	-c "YugaByte database" yugabyte
 
 %post server
-# chown -R 301:301 /etc/yugabytedb /var/log/yugabytedb /var/lib/yugabytedb
+chown -R 301:301 /etc/yugabytedb /var/log/yugabytedb /var/lib/yugabytedb
 # post_install.sh is required after upgrade of the package
 if [ -f "%{appdir}/.post_install.sh.completed" ]; then
   rm "%{appdir}/.post_install.sh.completed"
 fi
-
-
 %{appdir}/bin/post_install.sh
 
 %systemd_post yugabyted.service
@@ -202,9 +174,9 @@ fi
 %files server
 %defattr(-,root,root,-)
 %dir %attr(755,root,root) /etc/yugabytedb
-# %config(noreplace) %attr(640,301,301) /etc/yugabytedb/yugabytedb.conf
+%config(noreplace) %attr(640,301,301) /etc/yugabytedb/yugabytedb.conf
 %dir /opt/yugabytedb
-# %dir %attr(750,301,301) /var/log/yugabytedb
+%dir %attr(750,301,301) /var/log/yugabytedb
 /lib/systemd/system/yugabyted.service
 /usr/bin/yugabyted
 /opt/yugabytedb/*
