@@ -10,7 +10,6 @@
 %define _build_id_links none
 %define appdir /opt/yugabytedb
 
-%global debug_package %{nil}
 %global __strip /bin/true
 %global __jar_repack /bin/true
 
@@ -60,17 +59,6 @@ YugabyteDB is a free and open-source, distributed, relational, NewSQL database m
 %build
 # noop
 
-%pre
-# Verify if group 'yugabyte' exist; if not, create with GID 301
-if ! getent group yugabyte >/dev/null 2>&1; then
-    groupadd -g 301 yugabyte
-fi
-
-# Verify if user 'yugabyte' exist; if not, create with UID 301 and assign to 'yugabyte'
-if ! id "yugabyte" >/dev/null 2>&1; then
-    useradd -u 301 -g 301 -r -s /sbin/nologin -d /var/lib/yugabyte -c "YugaByte database" yugabyte
-fi
-
 %install
 rm -rf %{buildroot}
 
@@ -100,7 +88,7 @@ sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/opt/yugabyte
 sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/opt/yugabytedb/tools/k8s_parent.py
 sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/opt/yugabytedb/tools/k8s_ybc_parent.py
 
-# chown -R 301:301 . %{buildroot}/etc/yugabytedb %{buildroot}/var/log/yugabytedb %{buildroot}/var/lib/yugabytedb
+# chown -R yugabyte:yugabyte . %{buildroot}/etc/yugabytedb %{buildroot}/var/log/yugabytedb %{buildroot}/var/lib/yugabytedb
 
 # Find dead symlinks and repoint them to right path
 cd %{buildroot}%{appdir}/linuxbrew/Cellar/ncurses/6.1/share/terminfo/
@@ -135,7 +123,7 @@ getent passwd yugabyte >/dev/null || \
     	-c "YugaByte database" yugabyte
 
 %post server
-chown -R 301:301 /etc/yugabytedb /var/log/yugabytedb /var/lib/yugabytedb
+chown -R yugabyte:yugabyte /etc/yugabytedb /var/log/yugabytedb /var/lib/yugabytedb
 # post_install.sh is required after upgrade of the package
 if [ -f "%{appdir}/.post_install.sh.completed" ]; then
   rm "%{appdir}/.post_install.sh.completed"
@@ -174,9 +162,9 @@ fi
 %files server
 %defattr(-,root,root,-)
 %dir %attr(755,root,root) /etc/yugabytedb
-%config(noreplace) %attr(640,301,301) /etc/yugabytedb/yugabytedb.conf
+%config(noreplace) %attr(640,yugabyte,yugabyte) /etc/yugabytedb/yugabytedb.conf
 %dir /opt/yugabytedb
-%dir %attr(750,301,301) /var/log/yugabytedb
+%dir %attr(750,yugabyte,yugabyte) /var/log/yugabytedb
 /lib/systemd/system/yugabyted.service
 /usr/bin/yugabyted
 /opt/yugabytedb/*
