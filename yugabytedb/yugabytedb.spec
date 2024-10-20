@@ -96,7 +96,7 @@ find . -xtype l -exec bash -c 'ln -sfr $(readlink {}|cut -d"/" -f11-) {};' \;
  
 %{__install} -m 755 %{SOURCE3} %{buildroot}/opt/yugabytedb/bin/post_client_install.sh
 
-find /builddir/build/BUILDROOT/yugabytedb-2.20.6.0-1.el9.x86_64/opt/yugabytedb/bin/
+find /builddir/build/BUILDROOT/yugabytedb-%{version}-1.el9.x86_64/opt/yugabytedb/bin/
 
 %clean
 # noop
