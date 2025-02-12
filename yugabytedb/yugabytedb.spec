@@ -82,6 +82,7 @@ ln -s "%{appdir}/bin/ycqlsh" "%{buildroot}/usr/bin/ycqlsh"
 
 mv -f * %{buildroot}%{appdir}/
 sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/opt/yugabytedb/bin/yugabyted
+sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/opt/yugabytedb/postgres/bin/*.py
 sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/opt/yugabytedb/bin/yb-ctl
 sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/opt/yugabytedb/tools/yb-prof.py
 sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/opt/yugabytedb/tools/k8s_preflight.py
