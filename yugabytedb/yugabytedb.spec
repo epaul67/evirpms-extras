@@ -174,7 +174,6 @@ fi
 /usr/bin/ysqlsh
 /usr/bin/ycqlsh
 /opt/yugabytedb/pylib/*
-/opt/yugabytedb/linuxbrew/*
 /opt/yugabytedb/bin/cqlsh
 /opt/yugabytedb/bin/redis-cli
 /opt/yugabytedb/bin/ysqlsh
