@@ -91,8 +91,8 @@ sed -i 's/.*#!.*python.*/\#!\/usr\/bin\/env\ python3/' %{buildroot}/opt/yugabyte
 # chown -R yugabyte:yugabyte . %{buildroot}/etc/yugabytedb %{buildroot}/var/log/yugabytedb %{buildroot}/var/lib/yugabytedb
 
 # Find dead symlinks and repoint them to right path
-cd %{buildroot}%{appdir}/linuxbrew/Cellar/ncurses/6.1/share/terminfo/
-find . -xtype l -exec bash -c 'ln -sfr $(readlink {}|cut -d"/" -f11-) {};' \;
+## cd %{buildroot}%{appdir}/linuxbrew/Cellar/ncurses/6.1/share/terminfo/
+## find . -xtype l -exec bash -c 'ln -sfr $(readlink {}|cut -d"/" -f11-) {};' \;
  
 %{__install} -m 755 %{SOURCE3} %{buildroot}/opt/yugabytedb/bin/post_client_install.sh
 
@@ -183,7 +183,7 @@ fi
 /opt/yugabytedb/bin/ysqlsh
 /opt/yugabytedb/bin/ycqlsh
 /opt/yugabytedb/bin/ycqlsh.py*
-/opt/yugabytedb/bin/patchelf
+## /opt/yugabytedb/bin/patchelf
 /opt/yugabytedb/bin/post_client_install.sh
 /opt/yugabytedb/postgres/bin/ysqlsh
 /opt/yugabytedb/postgres/bin/ysql_dump
@@ -192,7 +192,7 @@ fi
 /opt/yugabytedb/postgres/bin/pg_isready
 /opt/yugabytedb/postgres/bin/pg_standby
 /opt/yugabytedb/lib/*.zip
-/opt/yugabytedb/lib/ld.so
+## /opt/yugabytedb/lib/ld.so
 /opt/yugabytedb/lib/yb/*
 /opt/yugabytedb/lib/yb-thirdparty/*
 /opt/yugabytedb/postgres/lib/*
